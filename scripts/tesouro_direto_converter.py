@@ -7,6 +7,7 @@ Descrição:
 1. Baixa automaticamente os CSVs do Tesouro Direto
 2. Consolida os dados
 3. Gera um único JSON estruturado
+4. Atualiza automaticamente no GitHub
 
 Arquivos utilizados:
 - rendimento-resgatar-csv
@@ -17,16 +18,19 @@ DEPENDÊNCIAS
 ================================================
 
 pip install pandas
-pip install cloudscraper
+pip install selenium
+pip install webdriver-manager
 
 ================================================
 """
 
-import pandas as pd
-import json
+import os
 import time
+import json
+import pandas as pd
 
 from pathlib import Path
+from datetime import datetime
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -34,13 +38,13 @@ from selenium.webdriver.chrome.service import Service
 
 from webdriver_manager.chrome import ChromeDriverManager
 
-from datetime import datetime
-
 # ================================================
 # CAMINHOS
 # ================================================
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+download_dir = str(BASE_DIR)
 
 csv_resgatar = BASE_DIR / "rendimento-resgatar.csv"
 
@@ -71,7 +75,18 @@ options = Options()
 options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--window-size=1920,1080")
+
+prefs = {
+    "download.default_directory": download_dir,
+    "download.prompt_for_download": False,
+    "download.directory_upgrade": True,
+    "safebrowsing.enabled": True
+}
+
+options.add_experimental_option(
+    "prefs",
+    prefs
+)
 
 driver = webdriver.Chrome(
     service=Service(
@@ -79,6 +94,23 @@ driver = webdriver.Chrome(
     ),
     options=options
 )
+
+# ================================================
+# REMOVE ARQUIVOS ANTIGOS
+# ================================================
+
+arquivos_antigos = [
+    BASE_DIR / "rendimento-resgatar-csv",
+    BASE_DIR / "rendimento-investir-csv",
+    csv_resgatar,
+    csv_investir
+]
+
+for arquivo in arquivos_antigos:
+
+    if arquivo.exists():
+
+        os.remove(arquivo)
 
 # ================================================
 # DOWNLOAD CSV RESGATE
@@ -90,16 +122,7 @@ print("====================================")
 
 driver.get(url_resgatar)
 
-time.sleep(5)
-
-conteudo = driver.find_element(
-    "tag name",
-    "body"
-).text
-
-with open(csv_resgatar, "w", encoding="utf-8") as f:
-
-    f.write(conteudo)
+time.sleep(10)
 
 print("CSV RESGATE baixado com sucesso!")
 
@@ -113,16 +136,7 @@ print("====================================")
 
 driver.get(url_investir)
 
-time.sleep(5)
-
-conteudo = driver.find_element(
-    "tag name",
-    "body"
-).text
-
-with open(csv_investir, "w", encoding="utf-8") as f:
-
-    f.write(conteudo)
+time.sleep(10)
 
 print("CSV INVESTIMENTO baixado com sucesso!")
 
@@ -131,6 +145,20 @@ print("CSV INVESTIMENTO baixado com sucesso!")
 # ================================================
 
 driver.quit()
+
+# ================================================
+# RENOMEIA ARQUIVOS
+# ================================================
+
+os.rename(
+    BASE_DIR / "rendimento-resgatar-csv",
+    csv_resgatar
+)
+
+os.rename(
+    BASE_DIR / "rendimento-investir-csv",
+    csv_investir
+)
 
 # ================================================
 # LEITURA CSV RESGATE
