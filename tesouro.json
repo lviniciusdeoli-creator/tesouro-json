@@ -1,434 +1,556 @@
 {
     "fonte": "Tesouro Direto",
     "quantidade_titulos": 61,
-    "atualizacao": "25/05/2026 14:15:54",
+    "atualizacao": "26/05/2026 03:54:08",
     "titulos": [
         {
-            "titulo": "Tesouro Selic 2027",
-            "rendimento_anual": "SELIC + 0.0184%",
-            "preco_resgate": 19076.67,
-            "vencimento": "01/03/2027",
-            "tipo": "SELIC"
-        },
-        {
-            "titulo": "Tesouro Selic 2028",
-            "rendimento_anual": "SELIC + 0.031%",
-            "preco_resgate": 19068.92,
-            "vencimento": "01/03/2028",
-            "tipo": "SELIC"
-        },
-        {
-            "titulo": "Tesouro Selic 2029",
-            "rendimento_anual": "SELIC + 0.0574%",
-            "preco_resgate": 19049.31,
-            "vencimento": "01/03/2029",
-            "tipo": "SELIC"
-        },
-        {
-            "titulo": "Tesouro Selic 2031",
-            "rendimento_anual": "SELIC + 0.0886%",
-            "preco_resgate": 18999.55,
-            "vencimento": "01/03/2031",
-            "tipo": "SELIC"
-        },
-        {
-            "titulo": "Tesouro Prefixado com Juros Semestrais 2027",
-            "rendimento_anual": "13.95%",
-            "preco_resgate": 1017.54,
-            "vencimento": "01/01/2027",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado 2027",
-            "rendimento_anual": "13.87%",
-            "preco_resgate": 924.64,
-            "vencimento": "01/01/2027",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado 2028",
-            "rendimento_anual": "13.70%",
-            "preco_resgate": 814.38,
-            "vencimento": "01/01/2028",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado com Juros Semestrais 2029",
-            "rendimento_anual": "13.82%",
-            "preco_resgate": 963.32,
-            "vencimento": "01/01/2029",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado 2029",
-            "rendimento_anual": "13.81%",
-            "preco_resgate": 715.92,
-            "vencimento": "01/01/2029",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado com Juros Semestrais 2031",
-            "rendimento_anual": "14.06%",
-            "preco_resgate": 913.39,
-            "vencimento": "01/01/2031",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado 2031",
-            "rendimento_anual": "13.97%",
-            "preco_resgate": 550.02,
-            "vencimento": "01/01/2031",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado 2032",
-            "rendimento_anual": "14.07%",
-            "preco_resgate": 480.25,
-            "vencimento": "01/01/2032",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado com Juros Semestrais 2033",
-            "rendimento_anual": "14.16%",
-            "preco_resgate": 874.16,
-            "vencimento": "01/01/2033",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado com Juros Semestrais 2035",
-            "rendimento_anual": "14.16%",
-            "preco_resgate": 847.13,
-            "vencimento": "01/01/2035",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro Prefixado com Juros Semestrais 2037",
-            "rendimento_anual": "14.16%",
-            "preco_resgate": 825.96,
-            "vencimento": "01/01/2037",
-            "tipo": "PREFIXADO"
-        },
-        {
-            "titulo": "Tesouro IPCA+ 2026",
-            "rendimento_anual": "IPCA + 10.45%",
-            "preco_resgate": 4606.3,
-            "vencimento": "15/08/2026",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2026",
-            "rendimento_anual": "IPCA + 10.45%",
-            "preco_resgate": 4742.48,
-            "vencimento": "15/08/2026",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ 2029",
-            "rendimento_anual": "IPCA + 7.95%",
-            "preco_resgate": 3762.4,
-            "vencimento": "15/05/2029",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2030",
-            "rendimento_anual": "IPCA + 8.00%",
-            "preco_resgate": 4476.64,
-            "vencimento": "15/08/2030",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ 2032",
-            "rendimento_anual": "IPCA + 7.90%",
-            "preco_resgate": 2943.53,
-            "vencimento": "15/08/2032",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2032",
-            "rendimento_anual": "IPCA + 7.92%",
-            "preco_resgate": 4373.2,
-            "vencimento": "15/08/2032",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ 2035",
-            "rendimento_anual": "IPCA + 7.75%",
-            "preco_resgate": 2423.04,
-            "vencimento": "15/05/2035",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2035",
-            "rendimento_anual": "IPCA + 7.79%",
-            "preco_resgate": 4211.76,
-            "vencimento": "15/05/2035",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2037",
-            "rendimento_anual": "IPCA + 7.65%",
-            "preco_resgate": 4180.42,
-            "vencimento": "15/05/2037",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ 2040",
-            "rendimento_anual": "IPCA + 7.44%",
-            "preco_resgate": 1707.6,
-            "vencimento": "15/08/2040",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2040",
-            "rendimento_anual": "IPCA + 7.55%",
-            "preco_resgate": 4189.84,
-            "vencimento": "15/08/2040",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ 2045",
-            "rendimento_anual": "IPCA + 7.35%",
-            "preco_resgate": 1237.22,
-            "vencimento": "15/05/2045",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2045",
-            "rendimento_anual": "IPCA + 7.48%",
-            "preco_resgate": 4054.48,
-            "vencimento": "15/05/2045",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ 2050",
-            "rendimento_anual": "IPCA + 7.19%",
-            "preco_resgate": 885.75,
-            "vencimento": "15/08/2050",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2050",
-            "rendimento_anual": "IPCA + 7.39%",
-            "preco_resgate": 4091.48,
-            "vencimento": "15/08/2050",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2055",
-            "rendimento_anual": "IPCA + 7.38%",
-            "preco_resgate": 3984.31,
-            "vencimento": "15/05/2055",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro IPCA+ com Juros Semestrais 2060",
-            "rendimento_anual": "IPCA + 7.38%",
-            "preco_resgate": 4018.65,
-            "vencimento": "15/08/2060",
-            "tipo": "IPCA"
-        },
-        {
-            "titulo": "Tesouro Renda+ Aposentadoria Extra 2030",
-            "rendimento_anual": "IPCA + 7.52%",
-            "preco_resgate": 1925.84,
-            "vencimento": "15/12/2049",
-            "tipo": "OUTRO"
-        },
-        {
-            "titulo": "Tesouro Renda+ Aposentadoria Extra 2035",
-            "rendimento_anual": "IPCA + 7.37%",
-            "preco_resgate": 1373.87,
-            "vencimento": "15/12/2054",
-            "tipo": "OUTRO"
-        },
-        {
-            "titulo": "Tesouro Renda+ Aposentadoria Extra 2040",
-            "rendimento_anual": "IPCA + 7.28%",
-            "preco_resgate": 982.11,
-            "vencimento": "15/12/2059",
-            "tipo": "OUTRO"
-        },
-        {
-            "titulo": "Tesouro Renda+ Aposentadoria Extra 2045",
-            "rendimento_anual": "IPCA + 7.23%",
-            "preco_resgate": 701.22,
-            "vencimento": "15/12/2064",
-            "tipo": "OUTRO"
-        },
-        {
-            "titulo": "Tesouro Renda+ Aposentadoria Extra 2050",
-            "rendimento_anual": "IPCA + 7.20%",
-            "preco_resgate": 500.02,
-            "vencimento": "15/12/2069",
-            "tipo": "OUTRO"
-        },
-        {
-            "titulo": "Tesouro Renda+ Aposentadoria Extra 2055",
-            "rendimento_anual": "IPCA + 7.21%",
-            "preco_resgate": 352.73,
-            "vencimento": "15/12/2074",
-            "tipo": "OUTRO"
-        },
-        {
-            "titulo": "Tesouro Renda+ Aposentadoria Extra 2060",
-            "rendimento_anual": "IPCA + 7.21%",
-            "preco_resgate": 249.54,
-            "vencimento": "15/12/2079",
-            "tipo": "OUTRO"
-        },
-        {
-            "titulo": "Tesouro Renda+ Aposentadoria Extra 2065",
-            "rendimento_anual": "IPCA + 7.21%",
-            "preco_resgate": 176.55,
-            "vencimento": "15/12/2084",
-            "tipo": "OUTRO"
-        },
-        {
             "titulo": "Tesouro Educa+ 2026",
-            "rendimento_anual": "IPCA + 8.04%",
-            "preco_resgate": 3637.34,
+            "taxa_resgate": "IPCA + 8.03%",
+            "preco_resgate": 3638.06,
             "vencimento": "15/12/2030",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2027",
-            "rendimento_anual": "IPCA + 7.99%",
-            "preco_resgate": 3742.84,
+            "taxa_resgate": "IPCA + 7.97%",
+            "preco_resgate": 3744.87,
             "vencimento": "15/12/2031",
+            "taxa_compra": "IPCA + 7.85%",
+            "preco_compra": 37.57,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2028",
-            "rendimento_anual": "IPCA + 7.96%",
-            "preco_resgate": 3471.23,
+            "taxa_resgate": "IPCA + 7.93%",
+            "preco_resgate": 3475.01,
             "vencimento": "15/12/2032",
+            "taxa_compra": "IPCA + 7.81%",
+            "preco_compra": 34.9,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2029",
-            "rendimento_anual": "IPCA + 7.93%",
-            "preco_resgate": 3221.17,
+            "taxa_resgate": "IPCA + 7.91%",
+            "preco_resgate": 3224.11,
             "vencimento": "15/12/2033",
+            "taxa_compra": "IPCA + 7.79%",
+            "preco_compra": 32.41,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2030",
-            "rendimento_anual": "IPCA + 7.89%",
-            "preco_resgate": 2991.84,
+            "taxa_resgate": "IPCA + 7.87%",
+            "preco_resgate": 2995.12,
             "vencimento": "15/12/2034",
+            "taxa_compra": "IPCA + 7.75%",
+            "preco_compra": 30.14,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2031",
-            "rendimento_anual": "IPCA + 7.84%",
-            "preco_resgate": 2782.82,
+            "taxa_resgate": "IPCA + 7.82%",
+            "preco_resgate": 2786.38,
             "vencimento": "15/12/2035",
+            "taxa_compra": "IPCA + 7.70%",
+            "preco_compra": 28.07,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2032",
-            "rendimento_anual": "IPCA + 7.78%",
-            "preco_resgate": 2592.88,
+            "taxa_resgate": "IPCA + 7.77%",
+            "preco_resgate": 2594.78,
             "vencimento": "15/12/2036",
+            "taxa_compra": "IPCA + 7.65%",
+            "preco_compra": 26.17,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2033",
-            "rendimento_anual": "IPCA + 7.72%",
-            "preco_resgate": 2418.78,
+            "taxa_resgate": "IPCA + 7.71%",
+            "preco_resgate": 2420.78,
             "vencimento": "15/12/2037",
+            "taxa_compra": "IPCA + 7.59%",
+            "preco_compra": 24.44,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2034",
-            "rendimento_anual": "IPCA + 7.65%",
-            "preco_resgate": 2261.35,
+            "taxa_resgate": "IPCA + 7.64%",
+            "preco_resgate": 2263.43,
             "vencimento": "15/12/2038",
+            "taxa_compra": "IPCA + 7.52%",
+            "preco_compra": 22.88,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2035",
-            "rendimento_anual": "IPCA + 7.58%",
+            "taxa_resgate": "IPCA + 7.58%",
             "preco_resgate": 2116.87,
             "vencimento": "15/12/2039",
+            "taxa_compra": "IPCA + 7.46%",
+            "preco_compra": 21.42,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2036",
-            "rendimento_anual": "IPCA + 7.53%",
-            "preco_resgate": 1979.36,
+            "taxa_resgate": "IPCA + 7.52%",
+            "preco_resgate": 1981.54,
             "vencimento": "15/12/2040",
+            "taxa_compra": "IPCA + 7.40%",
+            "preco_compra": 20.08,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2037",
-            "rendimento_anual": "IPCA + 7.48%",
+            "taxa_resgate": "IPCA + 7.48%",
             "preco_resgate": 1852.42,
             "vencimento": "15/12/2041",
+            "taxa_compra": "IPCA + 7.36%",
+            "preco_compra": 18.79,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2038",
-            "rendimento_anual": "IPCA + 7.45%",
-            "preco_resgate": 1730.78,
+            "taxa_resgate": "IPCA + 7.44%",
+            "preco_resgate": 1733.02,
             "vencimento": "15/12/2042",
+            "taxa_compra": "IPCA + 7.32%",
+            "preco_compra": 17.6,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2039",
-            "rendimento_anual": "IPCA + 7.42%",
-            "preco_resgate": 1617.89,
+            "taxa_resgate": "IPCA + 7.41%",
+            "preco_resgate": 1620.13,
             "vencimento": "15/12/2043",
+            "taxa_compra": "IPCA + 7.29%",
+            "preco_compra": 16.47,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2040",
-            "rendimento_anual": "IPCA + 7.40%",
-            "preco_resgate": 1511.09,
+            "taxa_resgate": "IPCA + 7.38%",
+            "preco_resgate": 1515.56,
             "vencimento": "15/12/2044",
+            "taxa_compra": "IPCA + 7.26%",
+            "preco_compra": 15.42,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2041",
-            "rendimento_anual": "IPCA + 7.38%",
-            "preco_resgate": 1411.97,
+            "taxa_resgate": "IPCA + 7.36%",
+            "preco_resgate": 1416.41,
             "vencimento": "15/12/2045",
+            "taxa_compra": "IPCA + 7.24%",
+            "preco_compra": 14.43,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2042",
-            "rendimento_anual": "IPCA + 7.36%",
-            "preco_resgate": 1319.93,
+            "taxa_resgate": "IPCA + 7.34%",
+            "preco_resgate": 1324.33,
             "vencimento": "15/12/2046",
+            "taxa_compra": "IPCA + 7.22%",
+            "preco_compra": 13.51,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2043",
-            "rendimento_anual": "IPCA + 7.33%",
-            "preco_resgate": 1236.62,
+            "taxa_resgate": "IPCA + 7.32%",
+            "preco_resgate": 1238.8,
             "vencimento": "15/12/2047",
+            "taxa_compra": "IPCA + 7.20%",
+            "preco_compra": 12.65,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Educa+ 2044",
-            "rendimento_anual": "IPCA + 7.31%",
-            "preco_resgate": 1157.08,
+            "taxa_resgate": "IPCA + 7.29%",
+            "preco_resgate": 1161.36,
             "vencimento": "15/12/2048",
+            "taxa_compra": "IPCA + 7.17%",
+            "preco_compra": 11.87,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro IGPM+ com Juros Semestrais 2031",
-            "rendimento_anual": "IGP-M + 8.15%",
+            "taxa_resgate": "IGP-M + 8.15%",
             "preco_resgate": 7928.45,
             "vencimento": "01/01/2031",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro IPCA+ 2026",
+            "taxa_resgate": "IPCA + 10.53%",
+            "preco_resgate": 4605.54,
+            "vencimento": "15/08/2026",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ 2029",
+            "taxa_resgate": "IPCA + 7.94%",
+            "preco_resgate": 3763.43,
+            "vencimento": "15/05/2029",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ 2032",
+            "taxa_resgate": "IPCA + 7.88%",
+            "preco_resgate": 2946.91,
+            "vencimento": "15/08/2032",
+            "taxa_compra": "IPCA + 7.76%",
+            "preco_compra": 29.67,
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ 2035",
+            "taxa_resgate": "IPCA + 7.73%",
+            "preco_resgate": 2427.06,
+            "vencimento": "15/05/2035",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ 2040",
+            "taxa_resgate": "IPCA + 7.43%",
+            "preco_resgate": 1709.85,
+            "vencimento": "15/08/2040",
+            "taxa_compra": "IPCA + 7.31%",
+            "preco_compra": 17.37,
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ 2045",
+            "taxa_resgate": "IPCA + 7.32%",
+            "preco_resgate": 1243.76,
+            "vencimento": "15/05/2045",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ 2050",
+            "taxa_resgate": "IPCA + 7.21%",
+            "preco_resgate": 881.77,
+            "vencimento": "15/08/2050",
+            "taxa_compra": "IPCA + 7.09%",
+            "preco_compra": 9.05,
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2026",
+            "taxa_resgate": "IPCA + 10.53%",
+            "preco_resgate": 4741.69,
+            "vencimento": "15/08/2026",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2030",
+            "taxa_resgate": "IPCA + 7.98%",
+            "preco_resgate": 4479.7,
+            "vencimento": "15/08/2030",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2032",
+            "taxa_resgate": "IPCA + 7.90%",
+            "preco_resgate": 4377.36,
+            "vencimento": "15/08/2032",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2035",
+            "taxa_resgate": "IPCA + 7.77%",
+            "preco_resgate": 4217.16,
+            "vencimento": "15/05/2035",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2037",
+            "taxa_resgate": "IPCA + 7.65%",
+            "preco_resgate": 4180.42,
+            "vencimento": "15/05/2037",
+            "taxa_compra": "IPCA + 7.53%",
+            "preco_compra": 42.17,
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2040",
+            "taxa_resgate": "IPCA + 7.54%",
+            "preco_resgate": 4193.45,
+            "vencimento": "15/08/2040",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2045",
+            "taxa_resgate": "IPCA + 7.46%",
+            "preco_resgate": 4062.75,
+            "vencimento": "15/05/2045",
+            "taxa_compra": "IPCA + 7.34%",
+            "preco_compra": 41.12,
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2050",
+            "taxa_resgate": "IPCA + 7.39%",
+            "preco_resgate": 4091.48,
+            "vencimento": "15/08/2050",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2055",
+            "taxa_resgate": "IPCA + 7.38%",
+            "preco_resgate": 3984.31,
+            "vencimento": "15/05/2055",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro IPCA+ com Juros Semestrais 2060",
+            "taxa_resgate": "IPCA + 7.38%",
+            "preco_resgate": 4018.65,
+            "vencimento": "15/08/2060",
+            "taxa_compra": "IPCA + 7.26%",
+            "preco_compra": 40.78,
+            "tipo": "IPCA"
+        },
+        {
+            "titulo": "Tesouro Prefixado 2027",
+            "taxa_resgate": "13.87%",
+            "preco_resgate": 924.64,
+            "vencimento": "01/01/2027",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado 2028",
+            "taxa_resgate": "13.70%",
+            "preco_resgate": 814.38,
+            "vencimento": "01/01/2028",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado 2029",
+            "taxa_resgate": "13.79%",
+            "preco_resgate": 716.24,
+            "vencimento": "01/01/2029",
+            "taxa_compra": "13.67%",
+            "preco_compra": 7.18,
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado 2031",
+            "taxa_resgate": "13.96%",
+            "preco_resgate": 550.25,
+            "vencimento": "01/01/2031",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado 2032",
+            "taxa_resgate": "14.06%",
+            "preco_resgate": 480.49,
+            "vencimento": "01/01/2032",
+            "taxa_compra": "13.94%",
+            "preco_compra": 4.83,
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado com Juros Semestrais 2027",
+            "taxa_resgate": "13.95%",
+            "preco_resgate": 1017.54,
+            "vencimento": "01/01/2027",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado com Juros Semestrais 2029",
+            "taxa_resgate": "13.80%",
+            "preco_resgate": 963.69,
+            "vencimento": "01/01/2029",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado com Juros Semestrais 2031",
+            "taxa_resgate": "14.04%",
+            "preco_resgate": 913.96,
+            "vencimento": "01/01/2031",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado com Juros Semestrais 2033",
+            "taxa_resgate": "14.14%",
+            "preco_resgate": 874.87,
+            "vencimento": "01/01/2033",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado com Juros Semestrais 2035",
+            "taxa_resgate": "14.15%",
+            "preco_resgate": 847.53,
+            "vencimento": "01/01/2035",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Prefixado com Juros Semestrais 2037",
+            "taxa_resgate": "14.16%",
+            "preco_resgate": 825.96,
+            "vencimento": "01/01/2037",
+            "taxa_compra": "14.04%",
+            "preco_compra": 8.31,
+            "tipo": "PREFIXADO"
+        },
+        {
+            "titulo": "Tesouro Renda+ Aposentadoria Extra 2030",
+            "taxa_resgate": "IPCA + 7.51%",
+            "preco_resgate": 1927.85,
+            "vencimento": "15/12/2049",
+            "taxa_compra": "IPCA + 7.39%",
+            "preco_compra": 19.52,
+            "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro Renda+ Aposentadoria Extra 2035",
+            "taxa_resgate": "IPCA + 7.37%",
+            "preco_resgate": 1373.87,
+            "vencimento": "15/12/2054",
+            "taxa_compra": "IPCA + 7.25%",
+            "preco_compra": 13.99,
+            "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro Renda+ Aposentadoria Extra 2040",
+            "taxa_resgate": "IPCA + 7.28%",
+            "preco_resgate": 982.11,
+            "vencimento": "15/12/2059",
+            "taxa_compra": "IPCA + 7.16%",
+            "preco_compra": 10.05,
+            "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro Renda+ Aposentadoria Extra 2045",
+            "taxa_resgate": "IPCA + 7.23%",
+            "preco_resgate": 701.22,
+            "vencimento": "15/12/2064",
+            "taxa_compra": "IPCA + 7.11%",
+            "preco_compra": 7.22,
+            "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro Renda+ Aposentadoria Extra 2050",
+            "taxa_resgate": "IPCA + 7.22%",
+            "preco_resgate": 497.12,
+            "vencimento": "15/12/2069",
+            "taxa_compra": "IPCA + 7.10%",
+            "preco_compra": 5.14,
+            "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro Renda+ Aposentadoria Extra 2055",
+            "taxa_resgate": "IPCA + 7.22%",
+            "preco_resgate": 351.54,
+            "vencimento": "15/12/2074",
+            "taxa_compra": "IPCA + 7.10%",
+            "preco_compra": 3.66,
+            "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro Renda+ Aposentadoria Extra 2060",
+            "taxa_resgate": "IPCA + 7.22%",
+            "preco_resgate": 248.59,
+            "vencimento": "15/12/2079",
+            "taxa_compra": "IPCA + 7.10%",
+            "preco_compra": 2.6,
+            "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro Renda+ Aposentadoria Extra 2065",
+            "taxa_resgate": "IPCA + 7.22%",
+            "preco_resgate": 175.8,
+            "vencimento": "15/12/2084",
+            "taxa_compra": "IPCA + 7.10%",
+            "preco_compra": 1.85,
             "tipo": "OUTRO"
         },
         {
             "titulo": "Tesouro Reserva 2036",
-            "rendimento_anual": "SELIC",
-            "preco_resgate": 10.543553,
+            "taxa_resgate": "SELIC",
+            "preco_resgate": 10.549183,
             "vencimento": "01/01/2036",
+            "taxa_compra": "SELIC",
+            "preco_compra": 1.0,
             "tipo": "OUTRO"
+        },
+        {
+            "titulo": "Tesouro Selic 2027",
+            "taxa_resgate": "SELIC + 0.0184%",
+            "preco_resgate": 19076.67,
+            "vencimento": "01/03/2027",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "SELIC"
+        },
+        {
+            "titulo": "Tesouro Selic 2028",
+            "taxa_resgate": "SELIC + 0.031%",
+            "preco_resgate": 19068.92,
+            "vencimento": "01/03/2028",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "SELIC"
+        },
+        {
+            "titulo": "Tesouro Selic 2029",
+            "taxa_resgate": "SELIC + 0.0574%",
+            "preco_resgate": 19049.31,
+            "vencimento": "01/03/2029",
+            "taxa_compra": "Não disponível para investimento",
+            "preco_compra": "Não disponível para investimento",
+            "tipo": "SELIC"
+        },
+        {
+            "titulo": "Tesouro Selic 2031",
+            "taxa_resgate": "SELIC + 0.0886%",
+            "preco_resgate": 18999.55,
+            "vencimento": "01/03/2031",
+            "taxa_compra": "SELIC + 0.0786%",
+            "preco_compra": 190.08,
+            "tipo": "SELIC"
         }
     ]
 }
