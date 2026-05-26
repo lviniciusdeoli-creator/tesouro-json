@@ -17,23 +17,20 @@ DEPENDÊNCIAS
 ================================================
 
 pip install pandas
-pip install cloudscraper
+pip install curl_cffi
 
 ================================================
 """
 
-import os
 import pandas as pd
 import json
-import cloudscraper
 
+from curl_cffi import requests as curl_requests
 from datetime import datetime
 
 # ================================================
 # CONFIGURAÇÕES
 # ================================================
-
-# URLS TESOURO DIRETO
 
 url_resgatar = (
     "https://www.tesourodireto.com.br/"
@@ -45,56 +42,15 @@ url_investir = (
     "documents/d/guest/rendimento-investir-csv?download=true"
 )
 
-# Arquivos temporários CSV
-
 csv_resgatar = "rendimento-resgatar.csv"
 csv_investir = "rendimento-investir.csv"
-
-# Arquivo JSON final
-
 json_file = "tesouro.json"
 
 # ================================================
-# PROXY RESIDENCIAL
+# CURL_CFFI - BYPASS CLOUDFLARE SEM PROXY
 # ================================================
 
-PROXY_HOST = os.environ.get("PROXY_HOST")  # brd.superproxy.io (vem do .yml)
-PROXY_PORT = os.environ.get("PROXY_PORT")  # 22225 (vem do .yml)
-PROXY_USER = os.environ.get("PROXY_USER")  # vem do GitHub Secret
-PROXY_PASS = os.environ.get("PROXY_PASS")  # vem do GitHub Secret
-
-missing = [k for k, v in {
-    "PROXY_HOST": PROXY_HOST,
-    "PROXY_PORT": PROXY_PORT,
-    "PROXY_USER": PROXY_USER,
-    "PROXY_PASS": PROXY_PASS,
-}.items() if not v]
-
-if missing:
-    raise EnvironmentError(
-        f"Variáveis de proxy ausentes ou vazias: {missing}"
-    )
-
-print(f"Proxy configurado: {PROXY_HOST}:{PROXY_PORT}")
-
-proxies = {
-    "http":  f"http://{PROXY_USER}:{PROXY_PASS}@{PROXY_HOST}:{PROXY_PORT}",
-    "https": f"http://{PROXY_USER}:{PROXY_PASS}@{PROXY_HOST}:{PROXY_PORT}",
-}
-
-# ================================================
-# CLOUDSCRAPER
-# ================================================
-
-scraper = cloudscraper.create_scraper(
-    browser={
-        "browser": "chrome",
-        "platform": "windows",
-        "mobile": False
-    }
-)
-
-scraper.proxies.update(proxies)
+session = curl_requests.Session(impersonate="chrome124")
 
 # ================================================
 # DOWNLOAD CSV RESGATE
@@ -104,11 +60,7 @@ print("====================================")
 print("Baixando CSV de RESGATE...")
 print("====================================")
 
-response = scraper.get(
-    url_resgatar,
-    timeout=30
-)
-
+response = session.get(url_resgatar, timeout=30)
 response.raise_for_status()
 
 with open(csv_resgatar, "wb") as f:
@@ -124,11 +76,7 @@ print("====================================")
 print("Baixando CSV de INVESTIMENTO...")
 print("====================================")
 
-response = scraper.get(
-    url_investir,
-    timeout=30
-)
-
+response = session.get(url_investir, timeout=30)
 response.raise_for_status()
 
 with open(csv_investir, "wb") as f:
@@ -140,17 +88,8 @@ print("CSV INVESTIMENTO baixado com sucesso!")
 # LEITURA CSV RESGATE
 # ================================================
 
-df_resgate = pd.read_csv(
-    csv_resgatar,
-    sep=";",
-    encoding="utf-8"
-)
-
+df_resgate = pd.read_csv(csv_resgatar, sep=";", encoding="utf-8")
 df_resgate.columns = df_resgate.columns.str.strip()
-
-# ================================================
-# RENOMEIA COLUNAS RESGATE
-# ================================================
 
 df_resgate.columns = [
     "titulo",
@@ -163,25 +102,10 @@ df_resgate.columns = [
 # LEITURA CSV INVESTIMENTO
 # ================================================
 
-df_investir = pd.read_csv(
-    csv_investir,
-    sep=";",
-    encoding="utf-8"
-)
-
+df_investir = pd.read_csv(csv_investir, sep=";", encoding="utf-8")
 df_investir.columns = df_investir.columns.str.strip()
 
-# ================================================
-# REMOVE COLUNA INVESTIMENTO MÍNIMO
-# ================================================
-
-# Mantém apenas as colunas desejadas
-
 df_investir = df_investir.iloc[:, [0, 1, 3, 4]]
-
-# ================================================
-# RENOMEIA COLUNAS INVESTIMENTO
-# ================================================
 
 df_investir.columns = [
     "titulo",
@@ -195,24 +119,16 @@ df_investir.columns = [
 # ================================================
 
 def identificar_tipo(titulo):
-
     titulo = titulo.upper()
 
     if "SELIC" in titulo:
         return "SELIC"
-
-    elif any(
-        termo in titulo
-        for termo in ["IPCA", "EDUCA", "RENDA"]
-    ):
+    elif any(termo in titulo for termo in ["IPCA", "EDUCA", "RENDA"]):
         return "IPCA"
-
     elif "IGPM" in titulo:
         return "IGPM"
-
     elif "RESERVA" in titulo:
         return "SELIC"
-
     elif "PREFIXADO" in titulo:
         return "PREFIXADO"
 
@@ -232,8 +148,7 @@ df_resgate["preco_resgate"] = (
 )
 
 df_resgate["preco_resgate"] = pd.to_numeric(
-    df_resgate["preco_resgate"],
-    errors="coerce"
+    df_resgate["preco_resgate"], errors="coerce"
 )
 
 df_resgate["taxa_resgate"] = (
@@ -257,8 +172,7 @@ df_investir["preco_compra"] = (
 )
 
 df_investir["preco_compra"] = pd.to_numeric(
-    df_investir["preco_compra"],
-    errors="coerce"
+    df_investir["preco_compra"], errors="coerce"
 )
 
 df_investir["taxa_compra"] = (
@@ -274,45 +188,26 @@ df_investir["taxa_compra"] = (
 
 df_final = pd.merge(
     df_resgate,
-    df_investir[[
-        "titulo",
-        "taxa_compra",
-        "preco_compra"
-    ]],
+    df_investir[["titulo", "taxa_compra", "preco_compra"]],
     on="titulo",
     how="outer"
 )
 
-# ================================================
-# IDENTIFICA TIPO
-# ================================================
-
-df_final["tipo"] = (
-    df_final["titulo"]
-    .apply(identificar_tipo)
-)
+df_final["tipo"] = df_final["titulo"].apply(identificar_tipo)
 
 # ================================================
 # TRATAMENTO DE VALORES AUSENTES
 # ================================================
 
-# Para títulos sem disponibilidade de investimento
-
-df_final["preco_compra"] = (
-    df_final["preco_compra"]
-    .fillna("Não disponível para investimento")
+df_final["preco_compra"] = df_final["preco_compra"].fillna(
+    "Não disponível para investimento"
 )
 
-df_final["taxa_compra"] = (
-    df_final["taxa_compra"]
-    .fillna("Não disponível para investimento")
+df_final["taxa_compra"] = df_final["taxa_compra"].fillna(
+    "Não disponível para investimento"
 )
 
-# Remove demais NaN
-df_final = df_final.where(
-    pd.notnull(df_final),
-    None
-)
+df_final = df_final.where(pd.notnull(df_final), None)
 
 # ================================================
 # CONVERTE PARA JSON
@@ -320,19 +215,8 @@ df_final = df_final.where(
 
 dados = df_final.to_dict(orient="records")
 
-# ================================================
-# DATA/HORA
-# ================================================
-
 agora = datetime.now()
-
-atualizacao = agora.strftime(
-    "%d/%m/%Y %H:%M:%S"
-)
-
-# ================================================
-# ESTRUTURA FINAL
-# ================================================
+atualizacao = agora.strftime("%d/%m/%Y %H:%M:%S")
 
 estrutura = {
     "fonte": "Tesouro Direto",
@@ -341,17 +225,8 @@ estrutura = {
     "titulos": dados
 }
 
-# ================================================
-# SALVA JSON
-# ================================================
-
 with open(json_file, "w", encoding="utf-8") as f:
-    json.dump(
-        estrutura,
-        f,
-        ensure_ascii=False,
-        indent=4
-    )
+    json.dump(estrutura, f, ensure_ascii=False, indent=4)
 
 # ================================================
 # FINALIZAÇÃO
