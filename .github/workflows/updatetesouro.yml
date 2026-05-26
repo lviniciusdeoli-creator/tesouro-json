@@ -1,0 +1,73 @@
+name: Atualizar Tesouro JSON
+
+on:
+
+  schedule:
+    - cron: "0 */6 * * *"
+
+  workflow_dispatch:
+
+jobs:
+
+  atualizar:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # ==========================================
+      # CLONA REPOSITÓRIO
+      # ==========================================
+
+      - name: Checkout
+
+        uses: actions/checkout@v4
+
+      # ==========================================
+      # INSTALA PYTHON
+      # ==========================================
+
+      - name: Setup Python
+
+        uses: actions/setup-python@v5
+
+        with:
+          python-version: "3.11"
+
+      # ==========================================
+      # INSTALA DEPENDÊNCIAS
+      # ==========================================
+
+      - name: Install dependencies
+
+        run: |
+
+          pip install pandas
+          pip install cloudscraper
+
+      # ==========================================
+      # EXECUTA SCRIPT
+      # ==========================================
+
+      - name: Executar atualização
+
+        run: |
+
+          python scripts/tesouro_direto_converter.py
+
+      # ==========================================
+      # COMMIT AUTOMÁTICO
+      # ==========================================
+
+      - name: Commit e Push
+
+        run: |
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add tesouro.json
+
+          git commit -m "Atualização automática Tesouro Direto" || echo "Sem alterações"
+
+          git push
