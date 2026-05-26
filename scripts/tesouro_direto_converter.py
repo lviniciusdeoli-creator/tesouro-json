@@ -112,22 +112,6 @@ print("====================================")
 print("Baixando CSV de INVESTIMENTO...")
 print("====================================")
 
-headers = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/125.0.0.0 Safari/537.36"
-    ),
-    "Accept": (
-        "text/html,application/xhtml+xml,"
-        "application/xml;q=0.9,image/avif,"
-        "image/webp,*/*;q=0.8"
-    ),
-    "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "Referer": "https://www.tesourodireto.com.br/",
-    "Connection": "keep-alive"
-}
-
 response = scraper.get(
     url_investir,
     headers=headers,
@@ -183,7 +167,7 @@ df_investir.columns = df_investir.columns.str.strip()
 
 # Mantém apenas as colunas desejadas
 
-df_investir = df_investir.iloc[:, :4]
+df_investir = df_investir.iloc[:, [0,1,3,4]]
 
 # ================================================
 # RENOMEIA COLUNAS INVESTIMENTO
@@ -207,8 +191,17 @@ def identificar_tipo(titulo):
     if "SELIC" in titulo:
         return "SELIC"
 
-    elif "IPCA" in titulo:
+    elif any(
+        termo in titulo
+        for termo in ["IPCA", "EDUCA", "RENDA"]
+    ):
         return "IPCA"
+
+    elif "IGPM" in titulo:
+        return "IGPM"
+
+    elif "RESERVA" in titulo:
+        return "SELIC"
 
     elif "PREFIXADO" in titulo:
         return "PREFIXADO"
