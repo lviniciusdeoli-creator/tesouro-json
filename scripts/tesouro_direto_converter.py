@@ -24,15 +24,33 @@ pip install cloudscraper
 
 import pandas as pd
 import json
-import cloudscraper
+import time
+
+from pathlib import Path
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+
+from webdriver_manager.chrome import ChromeDriverManager
 
 from datetime import datetime
 
 # ================================================
-# CONFIGURAÇÕES
+# CAMINHOS
 # ================================================
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+csv_resgatar = BASE_DIR / "rendimento-resgatar.csv"
+
+csv_investir = BASE_DIR / "rendimento-investir.csv"
+
+json_file = BASE_DIR / "tesouro.json"
+
+# ================================================
 # URLS TESOURO DIRETO
+# ================================================
 
 url_resgatar = (
     "https://www.tesourodireto.com.br/"
@@ -44,26 +62,22 @@ url_investir = (
     "documents/d/guest/rendimento-investir-csv?download=true"
 )
 
-# Arquivos temporários CSV
-
-csv_resgatar = "rendimento-resgatar.csv"
-
-csv_investir = "rendimento-investir.csv"
-
-# Arquivo JSON final
-
-json_file = "tesouro.json"
-
 # ================================================
-# CLOUDSCRAPER
+# SELENIUM
 # ================================================
 
-scraper = cloudscraper.create_scraper(
-    browser={
-        "browser": "chrome",
-        "platform": "windows",
-        "mobile": False
-    }
+options = Options()
+
+options.add_argument("--headless=new")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--window-size=1920,1080")
+
+driver = webdriver.Chrome(
+    service=Service(
+        ChromeDriverManager().install()
+    ),
+    options=options
 )
 
 # ================================================
@@ -74,33 +88,18 @@ print("====================================")
 print("Baixando CSV de RESGATE...")
 print("====================================")
 
-headers = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/125.0.0.0 Safari/537.36"
-    ),
-    "Accept": (
-        "text/html,application/xhtml+xml,"
-        "application/xml;q=0.9,image/avif,"
-        "image/webp,*/*;q=0.8"
-    ),
-    "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-    "Referer": "https://www.tesourodireto.com.br/",
-    "Connection": "keep-alive"
-}
+driver.get(url_resgatar)
 
-response = scraper.get(
-    url_resgatar,
-    headers=headers,
-    timeout=30
-)
+time.sleep(5)
 
-response.raise_for_status()
+conteudo = driver.find_element(
+    "tag name",
+    "body"
+).text
 
-with open(csv_resgatar, "wb") as f:
+with open(csv_resgatar, "w", encoding="utf-8") as f:
 
-    f.write(response.content)
+    f.write(conteudo)
 
 print("CSV RESGATE baixado com sucesso!")
 
@@ -112,19 +111,26 @@ print("====================================")
 print("Baixando CSV de INVESTIMENTO...")
 print("====================================")
 
-response = scraper.get(
-    url_investir,
-    headers=headers,
-    timeout=30
-)
+driver.get(url_investir)
 
-response.raise_for_status()
+time.sleep(5)
 
-with open(csv_investir, "wb") as f:
+conteudo = driver.find_element(
+    "tag name",
+    "body"
+).text
 
-    f.write(response.content)
+with open(csv_investir, "w", encoding="utf-8") as f:
+
+    f.write(conteudo)
 
 print("CSV INVESTIMENTO baixado com sucesso!")
+
+# ================================================
+# FECHA NAVEGADOR
+# ================================================
+
+driver.quit()
 
 # ================================================
 # LEITURA CSV RESGATE
@@ -164,8 +170,6 @@ df_investir.columns = df_investir.columns.str.strip()
 # ================================================
 # REMOVE COLUNA INVESTIMENTO MÍNIMO
 # ================================================
-
-# Mantém apenas as colunas desejadas
 
 df_investir = df_investir.iloc[:, [0,1,3,4]]
 
@@ -291,8 +295,6 @@ df_final["tipo"] = (
 # TRATAMENTO DE VALORES AUSENTES
 # ================================================
 
-# Para títulos sem disponibilidade de investimento
-
 df_final["preco_compra"] = (
     df_final["preco_compra"]
     .fillna("Não disponível para investimento")
@@ -303,17 +305,30 @@ df_final["taxa_compra"] = (
     .fillna("Não disponível para investimento")
 )
 
-# Remove demais NaN
+# ================================================
+# REMOVE NaN
+# ================================================
+
 df_final = df_final.where(
     pd.notnull(df_final),
     None
 )
 
 # ================================================
+# ORDENA TÍTULOS
+# ================================================
+
+df_final = df_final.sort_values(
+    by="titulo"
+)
+
+# ================================================
 # CONVERTE PARA JSON
 # ================================================
 
-dados = df_final.to_dict(orient="records")
+dados = df_final.to_dict(
+    orient="records"
+)
 
 # ================================================
 # DATA/HORA
