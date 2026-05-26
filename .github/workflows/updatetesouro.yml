@@ -43,7 +43,8 @@ jobs:
         run: |
 
           pip install pandas
-          pip install cloudscraper
+          pip install selenium
+          pip install webdriver-manager
 
       # ==========================================
       # EXECUTA SCRIPT
