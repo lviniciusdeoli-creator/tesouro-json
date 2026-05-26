@@ -49,14 +49,16 @@ Cada título contém:
 {
     "fonte": "Tesouro Direto",
     "quantidade_titulos": 61,
-    "atualizacao": "22/05/2026 17:23:31",
+    "atualizacao": "26/05/2026 03:54:08",
     "titulos": [
         {
-            "titulo": "Tesouro Selic 2027",
-            "rendimento_anual": "SELIC + 0.0181%",
-            "preco_resgate": 19066.5,
-            "vencimento": "01/03/2027",
-            "tipo": "SELIC"
+            "titulo": "Tesouro Educa+ 2027",
+            "taxa_resgate": "IPCA + 7.97%",
+            "preco_resgate": 3744.87,
+            "vencimento": "15/12/2031",
+            "taxa_compra": "IPCA + 7.85%",
+            "preco_compra": 37.57,
+            "tipo": "OUTRO"
         }
     ]
 }
