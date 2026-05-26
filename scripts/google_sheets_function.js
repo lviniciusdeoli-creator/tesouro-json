@@ -7,22 +7,39 @@
  * que consome os dados do arquivo JSON
  * hospedado no GitHub.
  * 
- * EXEMPLOS:
+ * ============================================
+ * EXEMPLOS
+ * ============================================
  * 
- * =TESOURO_DIRETO("Tesouro Selic 2027";"preco")
+ * =TESOURO_DIRETO(
+ *   "Tesouro Selic 2027";
+ *   "Preco Resgate"
+ * )
  * 
- * =TESOURO_DIRETO("Tesouro Selic 2027";"preco";"vencimento")
+ * =TESOURO_DIRETO(
+ *   "Tesouro Selic 2027";
+ *   "Preco Compra";
+ *   "Taxa Compra"
+ * )
  * 
- * =TESOURO_DIRETO("IPCA 2035";"tipo";"preco";"rendimento")
+ * =TESOURO_DIRETO(
+ *   "IPCA 2035";
+ *   "Tipo";
+ *   "Vencimento";
+ *   "Atualizacao"
+ * )
  * 
  * ============================================
  * PARÂMETROS DISPONÍVEIS
  * ============================================
  * 
- * "preco"
- * "rendimento"
- * "vencimento"
- * "tipo"
+ * "Taxa Resgate"
+ * "Taxa Compra"
+ * "Preco Resgate"
+ * "Preco Compra"
+ * "Vencimento"
+ * "Tipo"
+ * "Atualizacao"
  * 
  * ============================================
  */
@@ -86,13 +103,17 @@ function TESOURO_DIRETO(titulo) {
 
   const mapa = {
 
-    rendimento: "rendimento_anual",
+    "taxa resgate": "taxa_resgate",
 
-    preco: "preco_resgate",
+    "taxa compra": "taxa_compra",
 
-    vencimento: "vencimento",
+    "preco resgate": "preco_resgate",
 
-    tipo: "tipo"
+    "preco compra": "preco_investimento",
+
+    "vencimento": "vencimento",
+
+    "tipo": "tipo"
 
   };
 
@@ -102,12 +123,26 @@ function TESOURO_DIRETO(titulo) {
 
   const resultado = parametros.map(p => {
 
-    const chave =
-      mapa[
-        p
-          .toLowerCase()
-          .trim()
-      ];
+    const parametro =
+      p
+        .toLowerCase()
+        .trim();
+
+    // ============================================
+    // ATUALIZAÇÃO
+    // ============================================
+
+    if (parametro == "atualizacao") {
+
+      return dados.atualizacao;
+
+    }
+
+    // ============================================
+    // DADOS DO TÍTULO
+    // ============================================
+
+    const chave = mapa[parametro];
 
     return chave
       ? tituloEncontrado[chave]
