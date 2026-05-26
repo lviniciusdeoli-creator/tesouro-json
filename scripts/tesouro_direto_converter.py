@@ -24,27 +24,18 @@ pip install webdriver-manager
 ================================================
 """
 
-import os
-import time
 import json
 import pandas as pd
+import requests
 
 from pathlib import Path
 from datetime import datetime
-
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-
-from webdriver_manager.chrome import ChromeDriverManager
 
 # ================================================
 # CAMINHOS
 # ================================================
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-download_dir = str(BASE_DIR)
 
 csv_resgatar = BASE_DIR / "rendimento-resgatar.csv"
 
@@ -53,7 +44,7 @@ csv_investir = BASE_DIR / "rendimento-investir.csv"
 json_file = BASE_DIR / "tesouro.json"
 
 # ================================================
-# URLS TESOURO DIRETO
+# URLS
 # ================================================
 
 url_resgatar = (
@@ -67,71 +58,76 @@ url_investir = (
 )
 
 # ================================================
-# SELENIUM
+# HEADERS
 # ================================================
 
-options = Options()
+headers = {
 
-options.add_argument("--headless=new")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-
-driver = webdriver.Chrome(
-    service=Service(
-        ChromeDriverManager().install()
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/125.0.0.0 Safari/537.36"
     ),
-    options=options
+
+    "Accept": (
+        "text/html,application/xhtml+xml,"
+        "application/xml;q=0.9,image/avif,"
+        "image/webp,*/*;q=0.8"
+    ),
+
+    "Accept-Language":
+        "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+
+    "Referer":
+        "https://www.tesourodireto.com.br/",
+
+    "Connection":
+        "keep-alive"
+}
+
+# ================================================
+# DOWNLOAD RESGATE
+# ================================================
+
+print("====================================")
+print("Baixando CSV RESGATE...")
+print("====================================")
+
+response = requests.get(
+    url_resgatar,
+    headers=headers,
+    timeout=30
 )
 
+response.raise_for_status()
+
+with open(csv_resgatar, "wb") as f:
+
+    f.write(response.content)
+
+print("CSV RESGATE baixado!")
+
 # ================================================
-# DOWNLOAD CSV RESGATE
+# DOWNLOAD INVESTIMENTO
 # ================================================
 
 print("====================================")
-print("Baixando CSV de RESGATE...")
+print("Baixando CSV INVESTIMENTO...")
 print("====================================")
 
-driver.get(url_resgatar)
-
-time.sleep(5)
-
-conteudo_resgate = driver.execute_script(
-    "return document.body.innerText;"
+response = requests.get(
+    url_investir,
+    headers=headers,
+    timeout=30
 )
 
-with open(csv_resgatar, "w", encoding="utf-8") as f:
+response.raise_for_status()
 
-    f.write(conteudo_resgate)
+with open(csv_investir, "wb") as f:
 
-print("CSV RESGATE baixado com sucesso!")
+    f.write(response.content)
 
-# ================================================
-# DOWNLOAD CSV INVESTIMENTO
-# ================================================
-
-print("====================================")
-print("Baixando CSV de INVESTIMENTO...")
-print("====================================")
-
-driver.get(url_investir)
-
-time.sleep(5)
-
-conteudo_investimento = driver.execute_script(
-    "return document.body.innerText;"
-)
-
-with open(csv_investir, "w", encoding="utf-8") as f:
-
-    f.write(conteudo_investimento)
-
-print("CSV INVESTIMENTO baixado com sucesso!")
-
-# ================================================
-# FECHA NAVEGADOR
-# ================================================
-
-driver.quit()
+print("CSV INVESTIMENTO baixado!")
 
 # ================================================
 # LEITURA CSV RESGATE
@@ -144,10 +140,6 @@ df_resgate = pd.read_csv(
 )
 
 df_resgate.columns = df_resgate.columns.str.strip()
-
-# ================================================
-# RENOMEIA COLUNAS RESGATE
-# ================================================
 
 df_resgate.columns = [
     "titulo",
@@ -168,15 +160,7 @@ df_investir = pd.read_csv(
 
 df_investir.columns = df_investir.columns.str.strip()
 
-# ================================================
-# REMOVE COLUNA INVESTIMENTO MÍNIMO
-# ================================================
-
 df_investir = df_investir.iloc[:, [0,1,3,4]]
-
-# ================================================
-# RENOMEIA COLUNAS INVESTIMENTO
-# ================================================
 
 df_investir.columns = [
     "titulo",
@@ -264,7 +248,7 @@ df_investir["taxa_compra"] = (
 )
 
 # ================================================
-# MERGE DOS DADOS
+# MERGE
 # ================================================
 
 df_final = pd.merge(
@@ -293,7 +277,7 @@ df_final["tipo"] = (
 )
 
 # ================================================
-# TRATAMENTO DE VALORES AUSENTES
+# VALORES AUSENTES
 # ================================================
 
 df_final["preco_compra"] = (
@@ -306,17 +290,13 @@ df_final["taxa_compra"] = (
     .fillna("Não disponível para investimento")
 )
 
-# ================================================
-# REMOVE NaN
-# ================================================
-
 df_final = df_final.where(
     pd.notnull(df_final),
     None
 )
 
 # ================================================
-# ORDENA TÍTULOS
+# ORDENA
 # ================================================
 
 df_final = df_final.sort_values(
@@ -324,26 +304,16 @@ df_final = df_final.sort_values(
 )
 
 # ================================================
-# CONVERTE PARA JSON
+# JSON
 # ================================================
 
 dados = df_final.to_dict(
     orient="records"
 )
 
-# ================================================
-# DATA/HORA
-# ================================================
-
-agora = datetime.now()
-
-atualizacao = agora.strftime(
+atualizacao = datetime.now().strftime(
     "%d/%m/%Y %H:%M:%S"
 )
-
-# ================================================
-# ESTRUTURA FINAL
-# ================================================
 
 estrutura = {
     "fonte": "Tesouro Direto",
@@ -351,10 +321,6 @@ estrutura = {
     "atualizacao": atualizacao,
     "titulos": dados
 }
-
-# ================================================
-# SALVA JSON
-# ================================================
 
 with open(json_file, "w", encoding="utf-8") as f:
 
@@ -365,13 +331,6 @@ with open(json_file, "w", encoding="utf-8") as f:
         indent=4
     )
 
-# ================================================
-# FINALIZAÇÃO
-# ================================================
-
 print("====================================")
 print("JSON criado com sucesso!")
-print(f"Arquivo JSON: {json_file}")
-print(f"Títulos processados: {len(dados)}")
-print(f"Atualização: {atualizacao}")
 print("====================================")
