@@ -34,18 +34,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pandas
-          pip install cloudscraper
+          pip install curl_cffi
 
       # ==========================================
       # EXECUTA SCRIPT
       # ==========================================
 
       - name: Executar atualização
-        env:
-          PROXY_HOST: brd.superproxy.io
-          PROXY_PORT: "22225"
-          PROXY_USER: ${{ secrets.PROXY_USER }}
-          PROXY_PASS: ${{ secrets.PROXY_PASS }}
         run: |
           python scripts/tesouro_direto_converter.py
 
