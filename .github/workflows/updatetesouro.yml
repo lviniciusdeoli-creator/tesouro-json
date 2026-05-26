@@ -42,8 +42,8 @@ jobs:
 
       - name: Executar atualização
         env:
-          PROXY_HOST: ${{ secrets.PROXY_HOST }}
-          PROXY_PORT: ${{ secrets.PROXY_PORT }}
+          PROXY_HOST: brd.superproxy.io
+          PROXY_PORT: "22225"
           PROXY_USER: ${{ secrets.PROXY_USER }}
           PROXY_PASS: ${{ secrets.PROXY_PASS }}
         run: |
