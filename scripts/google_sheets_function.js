@@ -109,7 +109,7 @@ function TESOURO_DIRETO(titulo) {
 
     "preco resgate": "preco_resgate",
 
-    "preco compra": "preco_investimento",
+    "preco compra": "preco_compra",
 
     "vencimento": "vencimento",
 
