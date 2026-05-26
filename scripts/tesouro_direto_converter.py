@@ -96,6 +96,18 @@ driver = webdriver.Chrome(
 )
 
 # ================================================
+# HABILITA DOWNLOAD EM HEADLESS
+# ================================================
+
+driver.execute_cdp_cmd(
+    "Page.setDownloadBehavior",
+    {
+        "behavior": "allow",
+        "downloadPath": download_dir
+    }
+)
+
+# ================================================
 # REMOVE ARQUIVOS ANTIGOS
 # ================================================
 
@@ -122,7 +134,7 @@ print("====================================")
 
 driver.get(url_resgatar)
 
-time.sleep(15)
+time.sleep(20)
 
 print("CSV RESGATE baixado com sucesso!")
 
@@ -136,7 +148,7 @@ print("====================================")
 
 driver.get(url_investir)
 
-time.sleep(15)
+time.sleep(20)
 
 print("CSV INVESTIMENTO baixado com sucesso!")
 
