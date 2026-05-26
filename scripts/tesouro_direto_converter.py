@@ -122,7 +122,7 @@ print("====================================")
 
 driver.get(url_resgatar)
 
-time.sleep(10)
+time.sleep(15)
 
 print("CSV RESGATE baixado com sucesso!")
 
@@ -136,7 +136,7 @@ print("====================================")
 
 driver.get(url_investir)
 
-time.sleep(10)
+time.sleep(15)
 
 print("CSV INVESTIMENTO baixado com sucesso!")
 
@@ -147,16 +147,53 @@ print("CSV INVESTIMENTO baixado com sucesso!")
 driver.quit()
 
 # ================================================
-# RENOMEIA ARQUIVOS
+# LOCALIZA ARQUIVOS BAIXADOS
+# ================================================
+
+arquivos_csv = list(BASE_DIR.glob("*"))
+
+arquivo_resgate_encontrado = None
+arquivo_investimento_encontrado = None
+
+for arquivo in arquivos_csv:
+
+    nome = arquivo.name.lower()
+
+    if "resgatar" in nome:
+
+        arquivo_resgate_encontrado = arquivo
+
+    elif "investir" in nome:
+
+        arquivo_investimento_encontrado = arquivo
+
+# ================================================
+# VALIDA DOWNLOADS
+# ================================================
+
+if not arquivo_resgate_encontrado:
+
+    raise Exception(
+        "Arquivo de RESGATE não encontrado."
+    )
+
+if not arquivo_investimento_encontrado:
+
+    raise Exception(
+        "Arquivo de INVESTIMENTO não encontrado."
+    )
+
+# ================================================
+# RENOMEIA
 # ================================================
 
 os.rename(
-    BASE_DIR / "rendimento-resgatar-csv",
+    arquivo_resgate_encontrado,
     csv_resgatar
 )
 
 os.rename(
-    BASE_DIR / "rendimento-investir-csv",
+    arquivo_investimento_encontrado,
     csv_investir
 )
 
