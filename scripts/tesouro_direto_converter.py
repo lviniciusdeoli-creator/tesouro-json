@@ -76,53 +76,12 @@ options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-prefs = {
-    "download.default_directory": download_dir,
-    "download.prompt_for_download": False,
-    "download.directory_upgrade": True,
-    "safebrowsing.enabled": True
-}
-
-options.add_experimental_option(
-    "prefs",
-    prefs
-)
-
 driver = webdriver.Chrome(
     service=Service(
         ChromeDriverManager().install()
     ),
     options=options
 )
-
-# ================================================
-# HABILITA DOWNLOAD EM HEADLESS
-# ================================================
-
-driver.execute_cdp_cmd(
-    "Page.setDownloadBehavior",
-    {
-        "behavior": "allow",
-        "downloadPath": download_dir
-    }
-)
-
-# ================================================
-# REMOVE ARQUIVOS ANTIGOS
-# ================================================
-
-arquivos_antigos = [
-    BASE_DIR / "rendimento-resgatar-csv",
-    BASE_DIR / "rendimento-investir-csv",
-    csv_resgatar,
-    csv_investir
-]
-
-for arquivo in arquivos_antigos:
-
-    if arquivo.exists():
-
-        os.remove(arquivo)
 
 # ================================================
 # DOWNLOAD CSV RESGATE
@@ -134,7 +93,15 @@ print("====================================")
 
 driver.get(url_resgatar)
 
-time.sleep(20)
+time.sleep(5)
+
+conteudo_resgate = driver.execute_script(
+    "return document.body.innerText;"
+)
+
+with open(csv_resgatar, "w", encoding="utf-8") as f:
+
+    f.write(conteudo_resgate)
 
 print("CSV RESGATE baixado com sucesso!")
 
@@ -148,7 +115,15 @@ print("====================================")
 
 driver.get(url_investir)
 
-time.sleep(20)
+time.sleep(5)
+
+conteudo_investimento = driver.execute_script(
+    "return document.body.innerText;"
+)
+
+with open(csv_investir, "w", encoding="utf-8") as f:
+
+    f.write(conteudo_investimento)
 
 print("CSV INVESTIMENTO baixado com sucesso!")
 
@@ -157,57 +132,6 @@ print("CSV INVESTIMENTO baixado com sucesso!")
 # ================================================
 
 driver.quit()
-
-# ================================================
-# LOCALIZA ARQUIVOS BAIXADOS
-# ================================================
-
-arquivos_csv = list(BASE_DIR.glob("*"))
-
-arquivo_resgate_encontrado = None
-arquivo_investimento_encontrado = None
-
-for arquivo in arquivos_csv:
-
-    nome = arquivo.name.lower()
-
-    if "resgatar" in nome:
-
-        arquivo_resgate_encontrado = arquivo
-
-    elif "investir" in nome:
-
-        arquivo_investimento_encontrado = arquivo
-
-# ================================================
-# VALIDA DOWNLOADS
-# ================================================
-
-if not arquivo_resgate_encontrado:
-
-    raise Exception(
-        "Arquivo de RESGATE não encontrado."
-    )
-
-if not arquivo_investimento_encontrado:
-
-    raise Exception(
-        "Arquivo de INVESTIMENTO não encontrado."
-    )
-
-# ================================================
-# RENOMEIA
-# ================================================
-
-os.rename(
-    arquivo_resgate_encontrado,
-    csv_resgatar
-)
-
-os.rename(
-    arquivo_investimento_encontrado,
-    csv_investir
-)
 
 # ================================================
 # LEITURA CSV RESGATE
