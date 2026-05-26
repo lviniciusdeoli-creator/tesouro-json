@@ -22,6 +22,7 @@ pip install cloudscraper
 ================================================
 """
 
+import os
 import pandas as pd
 import json
 import cloudscraper
@@ -47,12 +48,39 @@ url_investir = (
 # Arquivos temporários CSV
 
 csv_resgatar = "rendimento-resgatar.csv"
-
 csv_investir = "rendimento-investir.csv"
 
 # Arquivo JSON final
 
 json_file = "tesouro.json"
+
+# ================================================
+# PROXY RESIDENCIAL
+# ================================================
+
+PROXY_HOST = os.environ.get("PROXY_HOST")  # brd.superproxy.io (vem do .yml)
+PROXY_PORT = os.environ.get("PROXY_PORT")  # 22225 (vem do .yml)
+PROXY_USER = os.environ.get("PROXY_USER")  # vem do GitHub Secret
+PROXY_PASS = os.environ.get("PROXY_PASS")  # vem do GitHub Secret
+
+missing = [k for k, v in {
+    "PROXY_HOST": PROXY_HOST,
+    "PROXY_PORT": PROXY_PORT,
+    "PROXY_USER": PROXY_USER,
+    "PROXY_PASS": PROXY_PASS,
+}.items() if not v]
+
+if missing:
+    raise EnvironmentError(
+        f"Variáveis de proxy ausentes ou vazias: {missing}"
+    )
+
+print(f"Proxy configurado: {PROXY_HOST}:{PROXY_PORT}")
+
+proxies = {
+    "http":  f"http://{PROXY_USER}:{PROXY_PASS}@{PROXY_HOST}:{PROXY_PORT}",
+    "https": f"http://{PROXY_USER}:{PROXY_PASS}@{PROXY_HOST}:{PROXY_PORT}",
+}
 
 # ================================================
 # CLOUDSCRAPER
@@ -66,10 +94,7 @@ scraper = cloudscraper.create_scraper(
     }
 )
 
-proxies = {
-    "http": "http://user:password@proxy.brightdata.com:22225",
-    "https": "http://user:password@proxy.brightdata.com:22225",
-}
+scraper.proxies.update(proxies)
 
 # ================================================
 # DOWNLOAD CSV RESGATE
@@ -81,14 +106,12 @@ print("====================================")
 
 response = scraper.get(
     url_resgatar,
-    proxies=proxies,
     timeout=30
 )
 
 response.raise_for_status()
 
 with open(csv_resgatar, "wb") as f:
-
     f.write(response.content)
 
 print("CSV RESGATE baixado com sucesso!")
@@ -103,14 +126,12 @@ print("====================================")
 
 response = scraper.get(
     url_investir,
-    proxies=proxies,
     timeout=30
 )
 
 response.raise_for_status()
 
 with open(csv_investir, "wb") as f:
-
     f.write(response.content)
 
 print("CSV INVESTIMENTO baixado com sucesso!")
@@ -156,7 +177,7 @@ df_investir.columns = df_investir.columns.str.strip()
 
 # Mantém apenas as colunas desejadas
 
-df_investir = df_investir.iloc[:, [0,1,3,4]]
+df_investir = df_investir.iloc[:, [0, 1, 3, 4]]
 
 # ================================================
 # RENOMEIA COLUNAS INVESTIMENTO
@@ -252,19 +273,14 @@ df_investir["taxa_compra"] = (
 # ================================================
 
 df_final = pd.merge(
-
     df_resgate,
-
     df_investir[[
         "titulo",
         "taxa_compra",
         "preco_compra"
     ]],
-
     on="titulo",
-
     how="outer"
-
 )
 
 # ================================================
@@ -330,7 +346,6 @@ estrutura = {
 # ================================================
 
 with open(json_file, "w", encoding="utf-8") as f:
-
     json.dump(
         estrutura,
         f,
